@@ -2,6 +2,7 @@
 set -x
 set -e 
 
+user=$(docker info|grep Username:|awk '{print $2}')
 for i in 0 1 2 3 4; do
  folder=go1.1${i}
  mkdir -p $folder
@@ -12,7 +13,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 RUN go get -u github.com/tcnksm/ghr
 EOF
  cd $folder && \
- image=arykalin/venafi-golang:1.1${i} && \
+ image=${user}/venafi-golang:1.1${i} && \
  docker build ./ -t $image && \
  docker push $image && \
  cd ..
