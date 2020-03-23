@@ -9,7 +9,7 @@ for i in 0 1 2 3 4; do
  cat <<EOF > $folder/Dockerfile
 FROM golang:1.1${i}
 
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /go/bin 
 RUN go get -u github.com/tcnksm/ghr
 EOF
  cd $folder && \
